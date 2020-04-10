@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Table from './Table';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {
+        musicians: [ {
+            name: 'Charlie',
+            surname: 'Parker',
+        },
+            {
+                name: 'Miles',
+                surname: 'Davis',
+            },
+            {
+                name: 'Kenny',
+                surname: 'Gareth',
+            },
+            {
+                name: 'Nina',
+                surname: 'Simone',
+            },
+        ],
+    };
+
+    removeCharacter = index => {
+        const { musicians } = this.state;
+
+        this.setState({
+            musicians: musicians.filter((musicians, i) => {
+                return i !== index
+            }),
+        })
+    };
+
+    render() {
+        const { musicians } = this.state;
+
+        return (
+            <div className="container">
+                <Table musiciansData={musicians} removeMusician={this.removeMusician} />
+            </div>
+        )
+    }
+
 }
-
 export default App;
